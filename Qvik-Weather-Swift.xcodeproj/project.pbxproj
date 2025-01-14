@@ -29,9 +29,22 @@
 		3F146D3B2D2AF4A80069F440 /* Qvik-Weather-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Qvik-Weather-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3F146D572D2B12080069F440 /* Exceptions for "Qvik-Weather-Swift" folder in "Qvik-Weather-Swift" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 3F146D202D2AF4A50069F440 /* Qvik-Weather-Swift */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3F146D232D2AF4A50069F440 /* Qvik-Weather-Swift */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3F146D572D2B12080069F440 /* Exceptions for "Qvik-Weather-Swift" folder in "Qvik-Weather-Swift" target */,
+			);
 			path = "Qvik-Weather-Swift";
 			sourceTree = "<group>";
 		};
@@ -399,6 +412,7 @@
 				DEVELOPMENT_TEAM = 624BW5M489;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Qvik-Weather-Swift/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Qvik Weather";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -431,6 +445,7 @@
 				DEVELOPMENT_TEAM = 624BW5M489;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Qvik-Weather-Swift/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Qvik Weather";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

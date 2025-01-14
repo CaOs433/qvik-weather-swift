@@ -7,18 +7,46 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+public struct ContentView: View {
+    init() {
+        self.configureNavigationBar()
     }
+    
+    public var body: some View {
+        NavigationStack {
+            EditAPIKeyView()
+        }
+            .toolbar(.visible)
+            .ignoresSafeArea()
+            .tint(Color.mainText)
+            .edgesIgnoringSafeArea(.all)
+    }
+    
+    private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+
+        let attrs: [NSAttributedString.Key: Any] = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont(name: "Inter-Regular_Bold", size: 12)!
+        ]
+        
+        appearance.largeTitleTextAttributes = attrs
+        appearance.titleTextAttributes = attrs
+        appearance.buttonAppearance.normal.titleTextAttributes = [
+            .foregroundColor: UIColor(named: "Main-Text-Color") ?? UIColor.white,
+            .font: UIFont(name: "Inter-Regular_Bold", size: 22)!
+        ]
+        
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
+    
 }
 
+#if DEBUG
 #Preview {
     ContentView()
 }
+#endif
