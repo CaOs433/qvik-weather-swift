@@ -56,7 +56,7 @@ private struct UpcomingDayWeatherRightColumnView: View {
     var body: some View {
         VStack(alignment: .leading) {
             UpcomingDayWeatherRowItemView(
-                iconName: "sunny_sunny_symbol",
+                iconName: self.weather.weather.first.getIconName,
                 valuePrefix: "",
                 value: self.weather.temp.day.roundedTemperature
             )

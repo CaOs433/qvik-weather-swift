@@ -173,6 +173,34 @@ extension OpenWeatherMapAPI {
             let main: String
             let description: String
             let icon: String
+            
+            var getIconName: String {
+                Onecall.Weather.icons[self.icon] ?? "question_mark_question_mark_symbol"
+            }
+            
+            static var icons: [String: String] {
+                [
+                    "01d": "sunny_sunny_symbol",
+                    "01n": "bedtime_bedtime_symbol",
+                    "02d": "partly_cloudy_day_partly_cloudy_day_symbol",
+                    "02n": "partly_cloudy_night_partly_cloudy_night_symbol",
+                    "03d": "cloud_cloud_symbol",
+                    "03n": "cloud_cloud_symbol",
+                    "04d": "cloud_cloud_symbol",
+                    "04n": "cloud_cloud_symbol",
+                    "09d": "rainy_rainy_symbol",
+                    "09n": "rainy_rainy_symbol",
+                    "10d": "rainy_rainy_symbol",
+                    "10n": "rainy_rainy_symbol",
+                    "11d": "thunderstorm_thunderstorm_symbol",
+                    "11n": "thunderstorm_thunderstorm_symbol",
+                    "13d": "ac_unit_ac_unit_symbol",
+                    "13n": "ac_unit_ac_unit_symbol",
+                    "50d": "mist_mist_symbol",
+                    "50n": "mist_mist_symbol",
+                ]
+            }
+            
         }
         
         struct Rain: Codable {
@@ -253,6 +281,18 @@ extension OpenWeatherMapAPI {
             try self.init(from: urlString)
         }
         
+    }
+    
+}
+
+extension Optional where Wrapped == Onecall.Weather {
+    var getIconName: String {
+        switch self {
+        case .some(let weather):
+            return weather.getIconName
+        case .none:
+            return "question_mark_question_mark_symbol"
+        }
     }
     
 }
