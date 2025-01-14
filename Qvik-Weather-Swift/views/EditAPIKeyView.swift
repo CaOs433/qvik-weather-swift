@@ -99,7 +99,7 @@ private struct EditAPIKeyTextFieldView: View {
     
     var body: some View {
         HStack {
-            Image("api_api_symbol")
+            Image("assets_other_api")
                 .frame(width: 24, height: 24)
                 .padding(.leading, 10)
             
@@ -107,7 +107,7 @@ private struct EditAPIKeyTextFieldView: View {
                 .padding(.vertical, 10)
             
             if self.apiKey.count > 0 {
-                Image("close_close_symbol")
+                Image("assets_other_close")
                     .frame(width: 24, height: 24)
                     .padding(.trailing, 10)
                     .foregroundStyle(Color.textFieldText)

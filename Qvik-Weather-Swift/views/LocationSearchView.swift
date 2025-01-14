@@ -73,7 +73,7 @@ private struct LocationSearchTextFieldView: View {
     
     var body: some View {
         HStack {
-            Image("search_search_symbol")
+            Image("assets_other_search")
                 .frame(width: 24, height: 24)
                 .padding(.leading, 10)
             
@@ -134,7 +134,7 @@ private struct LocationSearchTextFieldEmptyButtonView: View {
     @Binding var searchText: String
     
     var body: some View {
-        Image("close_close_symbol")
+        Image("assets_other_close")
             .frame(width: 24, height: 24)
             .padding(.trailing, 10)
             .foregroundStyle(Color.textFieldText)

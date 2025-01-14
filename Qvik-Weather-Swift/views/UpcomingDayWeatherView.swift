@@ -64,19 +64,19 @@ private struct UpcomingDayWeatherRightColumnView: View {
             if isExpanded {
                 Group() {
                     UpcomingDayWeatherRowItemView(
-                        iconName: "thermostat_arrow_up_thermostat_arrow_up_symbol",
+                        iconName: "assets_weather_max_temperature",
                         valuePrefix: "Max ",
                         value: self.weather.temp.max.roundedTemperature
                     )
                     
                     UpcomingDayWeatherRowItemView(
-                        iconName: "thermostat_arrow_down_thermostat_arrow_down_symbol",
+                        iconName: "assets_weather_min_temperature",
                         valuePrefix: "Min ",
                         value: self.weather.temp.min.roundedTemperature
                     )
                     
                     UpcomingDayWeatherRowItemView(
-                        iconName: "rainy_rainy_symbol",
+                        iconName: "assets_weather_rainy",
                         valuePrefix: "Rain ",
                         value: (self.weather.rain ?? 0).roundedRain
                     )

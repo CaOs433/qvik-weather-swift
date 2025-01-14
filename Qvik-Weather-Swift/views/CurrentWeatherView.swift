@@ -60,13 +60,13 @@ private struct CurrentWeatherDataView: View {
             HStack {
                 Spacer()
                 
-                Image("thermostat_arrow_up_thermostat_arrow_up_symbol")
+                Image("assets_weather_max_temperature")
                 Text("Max \(self.maxTemperature)")
                 
-                Image("thermostat_arrow_down_thermostat_arrow_down_symbol")
+                Image("assets_weather_min_temperature")
                 Text("Min \(self.minTemperature)")
                 
-                Image("rainy_rainy_symbol")
+                Image("assets_weather_rainy")
                 Text("Rain \(self.rain)mm")
                 
                 Spacer()

@@ -39,7 +39,7 @@ final class WeatherIconTests: XCTestCase {
         )
         XCTAssertEqual(
             weather.getIconName,
-            "question_mark_question_mark_symbol",
+            "assets_other_question_mark",
             "Unexpected icon name for invalid icon code"
         )
     }
@@ -56,7 +56,7 @@ final class WeatherIconTests: XCTestCase {
     }
     
     func testDefaultIconExistsInAssets() {
-        let defaultIconName = "question_mark_question_mark_symbol"
+        let defaultIconName = "assets_other_question_mark"
         XCTAssertNotNil(
             UIImage(named: defaultIconName),
             "Default image \(defaultIconName) not found in assets"
