@@ -9,6 +9,7 @@ import SwiftUI
 import CoreLocation
 
 public struct WeatherView: View {
+    @State var shouldUpdateWeather = false
     @State var isSearching: Bool = false
     @State var selectedLocation: Geo.GeoObject? = nil
     @State var temperatureUnit: Onecall.TemperatureUnit = .metric
@@ -75,18 +76,49 @@ public struct WeatherView: View {
                 weatherBackgroundGradientView
             )
             .onChange(of: self.locationManager.location) {
-                self.getWeatherData()
+                guard self.selectedLocation == nil else { return }
+                self.updateWeather()
             }
             .onChange(of: self.temperatureUnit) {
-                self.getWeatherData()
+                self.updateWeather()
             }
-            .onChange(of: self.selectedLocation) {
-                if self.isSearching {
-                    self.isSearching = false
+            .onChange(of: self.selectedLocation) { oldValue, newValue in
+                guard isNewLocation(
+                    oldLocation: oldValue,
+                    newLocation: newValue
+                ) else {
+                    return
                 }
                 
-                self.getWeatherData()
+                self.updateWeather()
             }
+    }
+    
+    func isNewLocation(
+        oldLocation: Geo.GeoObject? = nil,
+        newLocation: Geo.GeoObject? = nil
+    ) -> Bool {
+        guard let newLocation else {
+            return false
+        }
+        if let oldLocation {
+            guard oldLocation.id != newLocation.id else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func updateWeather() {
+        self.shouldUpdateWeather = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if self.shouldUpdateWeather {
+                self.getWeatherData()
+                self.shouldUpdateWeather = false
+            }
+        }
     }
     
     func getWeatherData() {

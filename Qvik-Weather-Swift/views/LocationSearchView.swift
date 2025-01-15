@@ -11,6 +11,7 @@ public struct LocationSearchView: View {
     @Binding var isSearching: Bool
     @Binding var selectedLocation: Geo.GeoObject?
     
+    @State private var shouldMakeSearch = false
     @State private var searchResults: [Geo.GeoObject] = []
     @State private var searchQuery: String = ""
     
@@ -31,14 +32,16 @@ public struct LocationSearchView: View {
             }
                 .padding(.horizontal)
             
-            if self.searchResults.count > 0 && self.searchQuery.count > 0 {
-                LocationSearchResultsView(
-                    searchText: self.$searchQuery,
-                    searchResults: self.$searchResults,
-                    selectedResult: self.$selectedLocation
-                )
-            } else if self.isSearching {
-                NoResultsView()
+            if self.isSearching && self.searchQuery.count > 0 {
+                if self.searchResults.count > 0 {
+                    LocationSearchResultsView(
+                        searchText: self.$searchQuery,
+                        searchResults: self.$searchResults,
+                        selectedResult: self.$selectedLocation
+                    )
+                } else {
+                    NoResultsView()
+                }
             }
             
             Spacer()
@@ -47,8 +50,16 @@ public struct LocationSearchView: View {
             .padding(.bottom, self.isSearching ? 400 : 0)
             .animation(.easeInOut, value: self.isSearching)
             .frame(maxHeight: .infinity)
-            .onChange(of: self.searchQuery) {
-                self.search()
+            .onChange(of: self.searchQuery) { oldValue, newValue in
+                guard oldValue != newValue, newValue.count > 0 else { return }
+                self.shouldMakeSearch = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    if self.shouldMakeSearch {
+                        self.search()
+                        self.shouldMakeSearch = false
+                    }
+                }
             }
     }
     
@@ -92,13 +103,6 @@ private struct LocationSearchTextFieldView: View {
             .cornerRadius(20)
             .font(.custom("Inter-Regular", size: 16))
             .foregroundStyle(Color.textFieldText)
-            .onTapGesture {
-                if !self.isSearching {
-                    withAnimation {
-                        self.isSearching = true
-                    }
-                }
-            }
     }
     
 }
@@ -119,10 +123,9 @@ private struct LocationSearchTextField: View {
             .foregroundStyle(Color.textFieldText)
             .onChange(of: self.searchText) {
                 withAnimation {
-                    if self.searchText.count == 0 {
-                        self.isSearching = false
-                    } else if !self.isSearching {
-                        self.isSearching = true
+                    let newIsSearching = self.searchText.count > 0
+                    if self.isSearching != newIsSearching {
+                        self.isSearching = newIsSearching
                     }
                 }
             }
@@ -180,6 +183,7 @@ private struct LocationSearchResultsView: View {
                             print("Selected city: \(result.name)")
                             self.selectedResult = result
                             self.searchResults = []
+                            self.searchText = ""
                         }
                         .tag(result.id)
                         .padding(.top, 5)
